@@ -31,13 +31,12 @@ pipeline {
         }
         stage('Push to dockerhub') {
             steps {
-				sh "docker rmi -f {docker images}
+
                 sh "docker push ${IMG_NAME} "
             }
         }
         stage('container creation') {
             steps {
-				sh "docker rm -f {docker ps -aq}"
                 sh "docker run -d -p 5000:5000 ${IMG_NAME}"
             }
         }
